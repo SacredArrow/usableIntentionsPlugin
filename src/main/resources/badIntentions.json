@@ -1,0 +1,12 @@
+[
+"Flip binary expression",
+"Replace with block comment",
+"Create Local Var from instanceof Usage",
+"Break string on '\\n'",
+"Convert to JavaFX property",
+"Unwrap 'else' branch",
+"Flip prefix/postfix expression",
+"Reverse direction of for loop",
+"Replace do while loop with while loop",
+"Replace while loop with do while loop"
+]

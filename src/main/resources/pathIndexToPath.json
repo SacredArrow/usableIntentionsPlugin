@@ -1,0 +1,1552 @@
+{
+    "1": {
+        "first": [
+            ""
+        ],
+        "second": 1
+    },
+    "2": {
+        "first": [
+            "",
+            "Move comment to separate line"
+        ],
+        "second": 2
+    },
+    "3": {
+        "first": [
+            "",
+            "Put parameters on separate lines"
+        ],
+        "second": 2
+    },
+    "4": {
+        "first": [
+            "",
+            "Put parameters on one line"
+        ],
+        "second": 2
+    },
+    "5": {
+        "first": [
+            "",
+            "Put parameters on one line",
+            "Put parameters on separate lines"
+        ],
+        "second": 3
+    },
+    "6": {
+        "first": [
+            "",
+            "Put arguments on separate lines"
+        ],
+        "second": 2
+    },
+    "7": {
+        "first": [
+            "",
+            "Replace with end-of-line comment"
+        ],
+        "second": 2
+    },
+    "8": {
+        "first": [
+            "",
+            "Replace on demand import with single class imports"
+        ],
+        "second": 2
+    },
+    "9": {
+        "first": [
+            "",
+            "Put arguments on separate lines",
+            "Put arguments on one line"
+        ],
+        "second": 3
+    },
+    "10": {
+        "first": [
+            "",
+            "Move initializer to constructor"
+        ],
+        "second": 2
+    },
+    "11": {
+        "first": [
+            "",
+            "Replace + with StringBuilder.append()"
+        ],
+        "second": 2
+    },
+    "12": {
+        "first": [
+            "",
+            "Replace string concatenation with String.format()"
+        ],
+        "second": 2
+    },
+    "13": {
+        "first": [
+            "",
+            "Replace on demand import with single class imports",
+            "Replace on demand import with single class imports"
+        ],
+        "second": 3
+    },
+    "14": {
+        "first": [
+            "",
+            "Replace on demand import with single class imports",
+            "Replace on demand import with single class imports",
+            "Replace on demand import with single class imports"
+        ],
+        "second": 4
+    },
+    "15": {
+        "first": [
+            "",
+            "Cast expression"
+        ],
+        "second": 2
+    },
+    "16": {
+        "first": [
+            "",
+            "Fix Character Literal"
+        ],
+        "second": 2
+    },
+    "17": {
+        "first": [
+            "",
+            "Replace concatenation with formatted output"
+        ],
+        "second": 2
+    },
+    "18": {
+        "first": [
+            "",
+            "Replace string concatenation with String.format()",
+            "Put arguments on separate lines"
+        ],
+        "second": 3
+    },
+    "19": {
+        "first": [
+            "",
+            "Replace multiply with shift"
+        ],
+        "second": 2
+    },
+    "20": {
+        "first": [
+            "",
+            "Replace try-with-resources with try-finally"
+        ],
+        "second": 2
+    },
+    "21": {
+        "first": [
+            "",
+            "Merge nested ifs"
+        ],
+        "second": 2
+    },
+    "22": {
+        "first": [
+            "",
+            "Replace concatenation with formatted output",
+            "Put arguments on separate lines"
+        ],
+        "second": 3
+    },
+    "23": {
+        "first": [
+            "",
+            "Extract while loop condition to internal if statement"
+        ],
+        "second": 2
+    },
+    "24": {
+        "first": [
+            "",
+            "Put arguments on one line"
+        ],
+        "second": 2
+    },
+    "25": {
+        "first": [
+            "",
+            "Put arguments on one line",
+            "Put arguments on separate lines"
+        ],
+        "second": 3
+    },
+    "26": {
+        "first": [
+            "",
+            "Put parameters on separate lines",
+            "Put parameters on one line"
+        ],
+        "second": 3
+    },
+    "27": {
+        "first": [
+            "",
+            "Merge nested ifs",
+            "Cast expression"
+        ],
+        "second": 3
+    },
+    "28": {
+        "first": [
+            "",
+            "Merge nested try statements"
+        ],
+        "second": 2
+    },
+    "29": {
+        "first": [
+            "",
+            "Merge nested try statements",
+            "Replace try-with-resources with try-finally"
+        ],
+        "second": 3
+    },
+    "30": {
+        "first": [
+            "",
+            "Replace + with StringBuilder.append()",
+            "Put arguments on separate lines"
+        ],
+        "second": 3
+    },
+    "31": {
+        "first": [
+            "",
+            "Flip commutative method call"
+        ],
+        "second": 2
+    },
+    "32": {
+        "first": [
+            "",
+            "Split switch branch with several case values into individual 'switch' branches"
+        ],
+        "second": 2
+    },
+    "33": {
+        "first": [
+            "",
+            "Merge else if"
+        ],
+        "second": 2
+    },
+    "34": {
+        "first": [
+            "",
+            "Assign parameter to field"
+        ],
+        "second": 2
+    },
+    "35": {
+        "first": [
+            "",
+            "Put parameters on one line",
+            "Assign parameter to field"
+        ],
+        "second": 3
+    },
+    "36": {
+        "first": [
+            "",
+            "Put parameters on one line",
+            "Put parameters on separate lines",
+            "Assign parameter to field"
+        ],
+        "second": 4
+    },
+    "37": {
+        "first": [
+            "",
+            "Split switch branch with several case values into individual 'switch' branches",
+            "Split switch branch with several case values into individual 'switch' branches"
+        ],
+        "second": 3
+    },
+    "38": {
+        "first": [
+            "",
+            "Split switch branch with several case values into individual 'switch' branches",
+            "Split switch branch with several case values into individual 'switch' branches",
+            "Split switch branch with several case values into individual 'switch' branches"
+        ],
+        "second": 4
+    },
+    "39": {
+        "first": [
+            "",
+            "Split switch branch with several case values into individual 'switch' branches",
+            "Split switch branch with several case values into individual 'switch' branches",
+            "Split switch branch with several case values into individual 'switch' branches",
+            "Split switch branch with several case values into individual 'switch' branches"
+        ],
+        "second": 5
+    },
+    "40": {
+        "first": [
+            "",
+            "Split switch branch with several case values into individual 'switch' branches",
+            "Split switch branch with several case values into individual 'switch' branches",
+            "Split switch branch with several case values into individual 'switch' branches",
+            "Split switch branch with several case values into individual 'switch' branches",
+            "Split switch branch with several case values into individual 'switch' branches"
+        ],
+        "second": 6
+    },
+    "41": {
+        "first": [
+            "",
+            "Split switch branch with several case values into individual 'switch' branches",
+            "Split switch branch with several case values into individual 'switch' branches",
+            "Split switch branch with several case values into individual 'switch' branches",
+            "Split switch branch with several case values into individual 'switch' branches",
+            "Split switch branch with several case values into individual 'switch' branches",
+            "Split switch branch with several case values into individual 'switch' branches"
+        ],
+        "second": 7
+    },
+    "42": {
+        "first": [
+            "",
+            "Underscores in numeric literals"
+        ],
+        "second": 2
+    },
+    "43": {
+        "first": [
+            "",
+            "Add on-demand static import"
+        ],
+        "second": 2
+    },
+    "44": {
+        "first": [
+            "",
+            "Sort content"
+        ],
+        "second": 2
+    },
+    "45": {
+        "first": [
+            "",
+            "Convert to Basic Latin"
+        ],
+        "second": 2
+    },
+    "46": {
+        "first": [
+            "",
+            "Replace switch with if"
+        ],
+        "second": 2
+    },
+    "47": {
+        "first": [
+            "",
+            "Fix Character Literal",
+            "Split switch branch with several case values into individual 'switch' branches"
+        ],
+        "second": 3
+    },
+    "48": {
+        "first": [
+            "",
+            "Merge sequential ifs"
+        ],
+        "second": 2
+    },
+    "49": {
+        "first": [
+            "",
+            "Replace + with StringBuilder.append()",
+            "Put arguments on separate lines",
+            "Put arguments on one line"
+        ],
+        "second": 4
+    },
+    "50": {
+        "first": [
+            "",
+            "Replace string concatenation with String.format()",
+            "Put arguments on separate lines",
+            "Put arguments on one line"
+        ],
+        "second": 4
+    },
+    "51": {
+        "first": [
+            "",
+            "Replace concatenation with formatted output",
+            "Put arguments on separate lines",
+            "Put arguments on one line"
+        ],
+        "second": 4
+    },
+    "52": {
+        "first": [
+            "",
+            "Put arguments on separate lines",
+            "Replace + with StringBuilder.append()"
+        ],
+        "second": 3
+    },
+    "53": {
+        "first": [
+            "",
+            "Put arguments on separate lines",
+            "Replace string concatenation with String.format()"
+        ],
+        "second": 3
+    },
+    "54": {
+        "first": [
+            "",
+            "Put arguments on separate lines",
+            "Replace string concatenation with String.format()",
+            "Put arguments on separate lines"
+        ],
+        "second": 4
+    },
+    "55": {
+        "first": [
+            "",
+            "Put arguments on separate lines",
+            "Put arguments on one line",
+            "Replace + with StringBuilder.append()"
+        ],
+        "second": 4
+    },
+    "56": {
+        "first": [
+            "",
+            "Put arguments on separate lines",
+            "Put arguments on one line",
+            "Replace string concatenation with String.format()"
+        ],
+        "second": 4
+    },
+    "57": {
+        "first": [
+            "",
+            "Put arguments on separate lines",
+            "Put arguments on one line",
+            "Replace string concatenation with String.format()",
+            "Put arguments on separate lines"
+        ],
+        "second": 5
+    },
+    "58": {
+        "first": [
+            "",
+            "Put parameters on separate lines",
+            "Assign parameter to field"
+        ],
+        "second": 3
+    },
+    "59": {
+        "first": [
+            "",
+            "Fix Character Literal",
+            "Put arguments on separate lines"
+        ],
+        "second": 3
+    },
+    "60": {
+        "first": [
+            "",
+            "Replace assignment with operator assignment"
+        ],
+        "second": 2
+    },
+    "61": {
+        "first": [
+            "",
+            "Replace assignment with operator assignment",
+            "Replace + with StringBuilder.append()"
+        ],
+        "second": 3
+    },
+    "62": {
+        "first": [
+            "",
+            "Replace assignment with operator assignment",
+            "Replace string concatenation with String.format()"
+        ],
+        "second": 3
+    },
+    "63": {
+        "first": [
+            "",
+            "Replace assignment with operator assignment",
+            "Replace concatenation with formatted output"
+        ],
+        "second": 3
+    },
+    "64": {
+        "first": [
+            "",
+            "Replace concatenation with formatted output",
+            "Put arguments on one line"
+        ],
+        "second": 3
+    },
+    "65": {
+        "first": [
+            "",
+            "Put arguments on one line",
+            "Replace + with StringBuilder.append()"
+        ],
+        "second": 3
+    },
+    "66": {
+        "first": [
+            "",
+            "Put arguments on one line",
+            "Replace string concatenation with String.format()"
+        ],
+        "second": 3
+    },
+    "67": {
+        "first": [
+            "",
+            "Put arguments on one line",
+            "Replace string concatenation with String.format()",
+            "Put arguments on separate lines"
+        ],
+        "second": 4
+    },
+    "68": {
+        "first": [
+            "",
+            "Replace + with StringBuilder.append()",
+            "Put arguments on one line"
+        ],
+        "second": 3
+    },
+    "69": {
+        "first": [
+            "",
+            "Put arguments on separate lines",
+            "Replace concatenation with formatted output"
+        ],
+        "second": 3
+    },
+    "70": {
+        "first": [
+            "",
+            "Put arguments on one line",
+            "Replace concatenation with formatted output"
+        ],
+        "second": 3
+    },
+    "71": {
+        "first": [
+            "",
+            "Put arguments on separate lines",
+            "Replace concatenation with formatted output",
+            "Put arguments on separate lines"
+        ],
+        "second": 4
+    },
+    "72": {
+        "first": [
+            "",
+            "Put arguments on one line",
+            "Replace concatenation with formatted output",
+            "Put arguments on separate lines"
+        ],
+        "second": 4
+    },
+    "73": {
+        "first": [
+            "",
+            "Replace string concatenation with String.format()",
+            "Put arguments on one line"
+        ],
+        "second": 3
+    },
+    "74": {
+        "first": [
+            "",
+            "Merge nested try statements",
+            "Merge nested try statements"
+        ],
+        "second": 3
+    },
+    "75": {
+        "first": [
+            "",
+            "Merge nested try statements",
+            "Merge nested try statements",
+            "Replace try-with-resources with try-finally"
+        ],
+        "second": 4
+    },
+    "76": {
+        "first": [
+            "",
+            "Flip commutative method call",
+            "Put arguments on separate lines"
+        ],
+        "second": 3
+    },
+    "77": {
+        "first": [
+            "",
+            "Move comment to separate line",
+            "Replace + with StringBuilder.append()"
+        ],
+        "second": 3
+    },
+    "78": {
+        "first": [
+            "",
+            "Move comment to separate line",
+            "Replace string concatenation with String.format()"
+        ],
+        "second": 3
+    },
+    "79": {
+        "first": [
+            "",
+            "Move comment to separate line",
+            "Put arguments on one line"
+        ],
+        "second": 3
+    },
+    "80": {
+        "first": [
+            "",
+            "Move comment to separate line",
+            "Replace + with StringBuilder.append()",
+            "Put arguments on one line"
+        ],
+        "second": 4
+    },
+    "81": {
+        "first": [
+            "",
+            "Move comment to separate line",
+            "Replace string concatenation with String.format()",
+            "Put arguments on one line"
+        ],
+        "second": 4
+    },
+    "82": {
+        "first": [
+            "",
+            "Move comment to separate line",
+            "Put arguments on one line",
+            "Put arguments on separate lines"
+        ],
+        "second": 4
+    },
+    "83": {
+        "first": [
+            "",
+            "Move comment to separate line",
+            "Replace + with StringBuilder.append()",
+            "Put arguments on one line",
+            "Put arguments on separate lines"
+        ],
+        "second": 5
+    },
+    "84": {
+        "first": [
+            "",
+            "Move comment to separate line",
+            "Replace string concatenation with String.format()",
+            "Put arguments on one line",
+            "Put arguments on separate lines"
+        ],
+        "second": 5
+    },
+    "85": {
+        "first": [
+            "",
+            "Move comment to separate line",
+            "Replace concatenation with formatted output"
+        ],
+        "second": 3
+    },
+    "86": {
+        "first": [
+            "",
+            "Move comment to separate line",
+            "Replace string concatenation with String.format()",
+            "Put arguments on separate lines"
+        ],
+        "second": 4
+    },
+    "87": {
+        "first": [
+            "",
+            "Move comment to separate line",
+            "Replace concatenation with formatted output",
+            "Put arguments on separate lines"
+        ],
+        "second": 4
+    },
+    "88": {
+        "first": [
+            "",
+            "Merge else if",
+            "Merge sequential ifs"
+        ],
+        "second": 3
+    },
+    "89": {
+        "first": [
+            "",
+            "Merge sequential ifs",
+            "Cast expression"
+        ],
+        "second": 3
+    },
+    "90": {
+        "first": [
+            "",
+            "Merge nested ifs",
+            "Merge nested ifs"
+        ],
+        "second": 3
+    },
+    "91": {
+        "first": [
+            "",
+            "Add explicit type arguments"
+        ],
+        "second": 2
+    },
+    "92": {
+        "first": [
+            "",
+            "Add explicit type arguments",
+            "Put arguments on separate lines"
+        ],
+        "second": 3
+    },
+    "93": {
+        "first": [
+            "",
+            "Put arguments on separate lines",
+            "Sort content"
+        ],
+        "second": 3
+    },
+    "94": {
+        "first": [
+            "",
+            "Move initializer to constructor",
+            "Move initializer to constructor"
+        ],
+        "second": 3
+    },
+    "95": {
+        "first": [
+            "",
+            "Extract to method reference"
+        ],
+        "second": 2
+    },
+    "96": {
+        "first": [
+            "",
+            "Extract to method reference",
+            "Move initializer to constructor"
+        ],
+        "second": 3
+    },
+    "97": {
+        "first": [
+            "",
+            "Extract to method reference",
+            "Move initializer to constructor",
+            "Move comment to separate line"
+        ],
+        "second": 4
+    },
+    "98": {
+        "first": [
+            "",
+            "Move initializer to constructor",
+            "Extract to method reference"
+        ],
+        "second": 3
+    },
+    "99": {
+        "first": [
+            "",
+            "Move initializer to constructor",
+            "Extract to method reference",
+            "Move initializer to constructor"
+        ],
+        "second": 4
+    },
+    "100": {
+        "first": [
+            "",
+            "Put arguments on separate lines",
+            "Extract to method reference"
+        ],
+        "second": 3
+    },
+    "101": {
+        "first": [
+            "",
+            "Put arguments on separate lines",
+            "Extract to method reference",
+            "Move initializer to constructor"
+        ],
+        "second": 4
+    },
+    "102": {
+        "first": [
+            "",
+            "Put arguments on separate lines",
+            "Extract to method reference",
+            "Move initializer to constructor",
+            "Move comment to separate line"
+        ],
+        "second": 5
+    },
+    "103": {
+        "first": [
+            "",
+            "Move initializer to constructor",
+            "Put arguments on separate lines"
+        ],
+        "second": 3
+    },
+    "104": {
+        "first": [
+            "",
+            "Move initializer to constructor",
+            "Put arguments on separate lines",
+            "Extract to method reference"
+        ],
+        "second": 4
+    },
+    "105": {
+        "first": [
+            "",
+            "Move initializer to constructor",
+            "Put arguments on separate lines",
+            "Extract to method reference",
+            "Move initializer to constructor"
+        ],
+        "second": 5
+    },
+    "106": {
+        "first": [
+            "",
+            "Put parameters on separate lines",
+            "Move initializer to constructor"
+        ],
+        "second": 3
+    },
+    "107": {
+        "first": [
+            "",
+            "Fix Character Literal",
+            "Extract to method reference"
+        ],
+        "second": 3
+    },
+    "108": {
+        "first": [
+            "",
+            "Fix Character Literal",
+            "Extract to method reference",
+            "Move initializer to constructor"
+        ],
+        "second": 4
+    },
+    "109": {
+        "first": [
+            "",
+            "Fix Character Literal",
+            "Extract to method reference",
+            "Move initializer to constructor",
+            "Move comment to separate line"
+        ],
+        "second": 5
+    },
+    "110": {
+        "first": [
+            "",
+            "Move comment to separate line",
+            "Extract to method reference"
+        ],
+        "second": 3
+    },
+    "111": {
+        "first": [
+            "",
+            "Move comment to separate line",
+            "Extract to method reference",
+            "Move initializer to constructor"
+        ],
+        "second": 4
+    },
+    "112": {
+        "first": [
+            "",
+            "Move initializer to constructor",
+            "Make method default"
+        ],
+        "second": 3
+    },
+    "113": {
+        "first": [
+            "",
+            "Move initializer to constructor",
+            "Put parameters on separate lines"
+        ],
+        "second": 3
+    },
+    "114": {
+        "first": [
+            "",
+            "Move initializer to constructor",
+            "Put parameters on separate lines",
+            "Make method default"
+        ],
+        "second": 4
+    },
+    "115": {
+        "first": [
+            "",
+            "Merge nested ifs",
+            "Extract to method reference"
+        ],
+        "second": 3
+    },
+    "116": {
+        "first": [
+            "",
+            "Cast expression",
+            "Extract to method reference"
+        ],
+        "second": 3
+    },
+    "117": {
+        "first": [
+            "",
+            "Merge nested ifs",
+            "Extract to method reference",
+            "Move initializer to constructor"
+        ],
+        "second": 4
+    },
+    "118": {
+        "first": [
+            "",
+            "Cast expression",
+            "Extract to method reference",
+            "Move initializer to constructor"
+        ],
+        "second": 4
+    },
+    "119": {
+        "first": [
+            "",
+            "Merge nested ifs",
+            "Extract to method reference",
+            "Move initializer to constructor",
+            "Move comment to separate line"
+        ],
+        "second": 5
+    },
+    "120": {
+        "first": [
+            "",
+            "Cast expression",
+            "Extract to method reference",
+            "Move initializer to constructor",
+            "Move comment to separate line"
+        ],
+        "second": 5
+    },
+    "121": {
+        "first": [
+            "",
+            "Move comment to separate line",
+            "Extract to method reference",
+            "Move initializer to constructor",
+            "Move comment to separate line"
+        ],
+        "second": 5
+    },
+    "122": {
+        "first": [
+            "",
+            "Replace + with StringBuilder.append()",
+            "Extract to method reference"
+        ],
+        "second": 3
+    },
+    "123": {
+        "first": [
+            "",
+            "Replace string concatenation with String.format()",
+            "Extract to method reference"
+        ],
+        "second": 3
+    },
+    "124": {
+        "first": [
+            "",
+            "Replace + with StringBuilder.append()",
+            "Extract to method reference",
+            "Move initializer to constructor"
+        ],
+        "second": 4
+    },
+    "125": {
+        "first": [
+            "",
+            "Replace string concatenation with String.format()",
+            "Extract to method reference",
+            "Move initializer to constructor"
+        ],
+        "second": 4
+    },
+    "126": {
+        "first": [
+            "",
+            "Replace + with StringBuilder.append()",
+            "Extract to method reference",
+            "Move initializer to constructor",
+            "Move comment to separate line"
+        ],
+        "second": 5
+    },
+    "127": {
+        "first": [
+            "",
+            "Replace string concatenation with String.format()",
+            "Extract to method reference",
+            "Move initializer to constructor",
+            "Move comment to separate line"
+        ],
+        "second": 5
+    },
+    "128": {
+        "first": [
+            "",
+            "Make method default"
+        ],
+        "second": 2
+    },
+    "129": {
+        "first": [
+            "",
+            "Put parameters on separate lines",
+            "Make method default"
+        ],
+        "second": 3
+    },
+    "130": {
+        "first": [
+            "",
+            "Replace concatenation with formatted output",
+            "Extract to method reference"
+        ],
+        "second": 3
+    },
+    "131": {
+        "first": [
+            "",
+            "Replace concatenation with formatted output",
+            "Extract to method reference",
+            "Move initializer to constructor"
+        ],
+        "second": 4
+    },
+    "132": {
+        "first": [
+            "",
+            "Replace concatenation with formatted output",
+            "Extract to method reference",
+            "Move initializer to constructor",
+            "Move comment to separate line"
+        ],
+        "second": 5
+    },
+    "133": {
+        "first": [
+            "",
+            "Merge nested ifs",
+            "Cast expression",
+            "Extract to method reference"
+        ],
+        "second": 4
+    },
+    "134": {
+        "first": [
+            "",
+            "Merge nested ifs",
+            "Cast expression",
+            "Extract to method reference",
+            "Move initializer to constructor"
+        ],
+        "second": 5
+    },
+    "135": {
+        "first": [
+            "",
+            "Merge nested ifs",
+            "Cast expression",
+            "Extract to method reference",
+            "Move initializer to constructor",
+            "Move comment to separate line"
+        ],
+        "second": 6
+    },
+    "136": {
+        "first": [
+            "",
+            "Replace string concatenation with String.format()",
+            "Put arguments on separate lines",
+            "Extract to method reference"
+        ],
+        "second": 4
+    },
+    "137": {
+        "first": [
+            "",
+            "Replace string concatenation with String.format()",
+            "Put arguments on separate lines",
+            "Extract to method reference",
+            "Move initializer to constructor"
+        ],
+        "second": 5
+    },
+    "138": {
+        "first": [
+            "",
+            "Replace string concatenation with String.format()",
+            "Put arguments on separate lines",
+            "Extract to method reference",
+            "Move initializer to constructor",
+            "Move comment to separate line"
+        ],
+        "second": 6
+    },
+    "139": {
+        "first": [
+            "",
+            "Replace + with StringBuilder.append()",
+            "Replace + with StringBuilder.append()"
+        ],
+        "second": 3
+    },
+    "140": {
+        "first": [
+            "",
+            "Replace + with StringBuilder.append()",
+            "Replace string concatenation with String.format()"
+        ],
+        "second": 3
+    },
+    "141": {
+        "first": [
+            "",
+            "Replace + with StringBuilder.append()",
+            "Replace concatenation with formatted output"
+        ],
+        "second": 3
+    },
+    "142": {
+        "first": [
+            "",
+            "Replace concatenation with formatted output",
+            "Replace + with StringBuilder.append()"
+        ],
+        "second": 3
+    },
+    "143": {
+        "first": [
+            "",
+            "Replace concatenation with formatted output",
+            "Replace string concatenation with String.format()"
+        ],
+        "second": 3
+    },
+    "144": {
+        "first": [
+            "",
+            "Replace concatenation with formatted output",
+            "Replace concatenation with formatted output"
+        ],
+        "second": 3
+    },
+    "145": {
+        "first": [
+            "",
+            "Replace + with StringBuilder.append()",
+            "Replace string concatenation with String.format()",
+            "Put arguments on separate lines"
+        ],
+        "second": 4
+    },
+    "146": {
+        "first": [
+            "",
+            "Replace + with StringBuilder.append()",
+            "Replace concatenation with formatted output",
+            "Put arguments on separate lines"
+        ],
+        "second": 4
+    },
+    "147": {
+        "first": [
+            "",
+            "Replace concatenation with formatted output",
+            "Replace string concatenation with String.format()",
+            "Put arguments on separate lines"
+        ],
+        "second": 4
+    },
+    "148": {
+        "first": [
+            "",
+            "Replace concatenation with formatted output",
+            "Replace concatenation with formatted output",
+            "Put arguments on separate lines"
+        ],
+        "second": 4
+    },
+    "149": {
+        "first": [
+            "",
+            "Replace concatenation with formatted output",
+            "Put arguments on separate lines",
+            "Replace + with StringBuilder.append()"
+        ],
+        "second": 4
+    },
+    "150": {
+        "first": [
+            "",
+            "Replace concatenation with formatted output",
+            "Put arguments on separate lines",
+            "Replace string concatenation with String.format()"
+        ],
+        "second": 4
+    },
+    "151": {
+        "first": [
+            "",
+            "Replace concatenation with formatted output",
+            "Put arguments on separate lines",
+            "Replace concatenation with formatted output"
+        ],
+        "second": 4
+    },
+    "152": {
+        "first": [
+            "",
+            "Replace concatenation with formatted output",
+            "Put arguments on separate lines",
+            "Replace string concatenation with String.format()",
+            "Put arguments on separate lines"
+        ],
+        "second": 5
+    },
+    "153": {
+        "first": [
+            "",
+            "Replace concatenation with formatted output",
+            "Put arguments on separate lines",
+            "Replace concatenation with formatted output",
+            "Put arguments on separate lines"
+        ],
+        "second": 5
+    },
+    "154": {
+        "first": [
+            "",
+            "Replace string concatenation with String.format()",
+            "Replace + with StringBuilder.append()"
+        ],
+        "second": 3
+    },
+    "155": {
+        "first": [
+            "",
+            "Replace string concatenation with String.format()",
+            "Replace string concatenation with String.format()"
+        ],
+        "second": 3
+    },
+    "156": {
+        "first": [
+            "",
+            "Replace string concatenation with String.format()",
+            "Replace concatenation with formatted output"
+        ],
+        "second": 3
+    },
+    "157": {
+        "first": [
+            "",
+            "Replace string concatenation with String.format()",
+            "Replace + with StringBuilder.append()",
+            "Put arguments on separate lines"
+        ],
+        "second": 4
+    },
+    "158": {
+        "first": [
+            "",
+            "Replace string concatenation with String.format()",
+            "Replace string concatenation with String.format()",
+            "Put arguments on separate lines"
+        ],
+        "second": 4
+    },
+    "159": {
+        "first": [
+            "",
+            "Replace string concatenation with String.format()",
+            "Replace concatenation with formatted output",
+            "Put arguments on separate lines"
+        ],
+        "second": 4
+    },
+    "160": {
+        "first": [
+            "",
+            "Replace concatenation with formatted output",
+            "Replace + with StringBuilder.append()",
+            "Put arguments on separate lines"
+        ],
+        "second": 4
+    },
+    "161": {
+        "first": [
+            "",
+            "Replace string concatenation with String.format()",
+            "Put arguments on separate lines",
+            "Replace + with StringBuilder.append()"
+        ],
+        "second": 4
+    },
+    "162": {
+        "first": [
+            "",
+            "Replace string concatenation with String.format()",
+            "Put arguments on separate lines",
+            "Replace concatenation with formatted output"
+        ],
+        "second": 4
+    },
+    "163": {
+        "first": [
+            "",
+            "Replace string concatenation with String.format()",
+            "Put arguments on separate lines",
+            "Replace concatenation with formatted output",
+            "Put arguments on separate lines"
+        ],
+        "second": 5
+    },
+    "164": {
+        "first": [
+            "",
+            "Replace string concatenation with String.format()",
+            "Put arguments on separate lines",
+            "Replace string concatenation with String.format()"
+        ],
+        "second": 4
+    },
+    "165": {
+        "first": [
+            "",
+            "Replace string concatenation with String.format()",
+            "Put arguments on separate lines",
+            "Replace string concatenation with String.format()",
+            "Put arguments on separate lines"
+        ],
+        "second": 5
+    },
+    "166": {
+        "first": [
+            "",
+            "Simplify if else"
+        ],
+        "second": 2
+    },
+    "167": {
+        "first": [
+            "",
+            "Fix Character Literal",
+            "Replace + with StringBuilder.append()"
+        ],
+        "second": 3
+    },
+    "168": {
+        "first": [
+            "",
+            "Fix Character Literal",
+            "Replace string concatenation with String.format()"
+        ],
+        "second": 3
+    },
+    "169": {
+        "first": [
+            "",
+            "Fix Character Literal",
+            "Replace concatenation with formatted output"
+        ],
+        "second": 3
+    },
+    "170": {
+        "first": [
+            "",
+            "Fix Character Literal",
+            "Replace string concatenation with String.format()",
+            "Fix Character Literal"
+        ],
+        "second": 4
+    },
+    "171": {
+        "first": [
+            "",
+            "Fix Character Literal",
+            "Replace string concatenation with String.format()",
+            "Put arguments on separate lines"
+        ],
+        "second": 4
+    },
+    "172": {
+        "first": [
+            "",
+            "Fix Character Literal",
+            "Replace concatenation with formatted output",
+            "Put arguments on separate lines"
+        ],
+        "second": 4
+    },
+    "173": {
+        "first": [
+            "",
+            "Fix Character Literal",
+            "Replace string concatenation with String.format()",
+            "Fix Character Literal",
+            "Replace + with StringBuilder.append()"
+        ],
+        "second": 5
+    },
+    "174": {
+        "first": [
+            "",
+            "Fix Character Literal",
+            "Replace string concatenation with String.format()",
+            "Fix Character Literal",
+            "Replace string concatenation with String.format()"
+        ],
+        "second": 5
+    },
+    "175": {
+        "first": [
+            "",
+            "Fix Character Literal",
+            "Replace string concatenation with String.format()",
+            "Fix Character Literal",
+            "Replace concatenation with formatted output"
+        ],
+        "second": 5
+    },
+    "176": {
+        "first": [
+            "",
+            "Fix Character Literal",
+            "Replace string concatenation with String.format()",
+            "Fix Character Literal",
+            "Put arguments on separate lines"
+        ],
+        "second": 5
+    },
+    "177": {
+        "first": [
+            "",
+            "Fix Character Literal",
+            "Replace string concatenation with String.format()",
+            "Fix Character Literal",
+            "Replace + with StringBuilder.append()",
+            "Put arguments on separate lines"
+        ],
+        "second": 6
+    },
+    "178": {
+        "first": [
+            "",
+            "Fix Character Literal",
+            "Replace string concatenation with String.format()",
+            "Fix Character Literal",
+            "Replace string concatenation with String.format()",
+            "Put arguments on separate lines"
+        ],
+        "second": 6
+    },
+    "179": {
+        "first": [
+            "",
+            "Fix Character Literal",
+            "Replace string concatenation with String.format()",
+            "Fix Character Literal",
+            "Replace concatenation with formatted output",
+            "Put arguments on separate lines"
+        ],
+        "second": 6
+    },
+    "180": {
+        "first": [
+            "",
+            "Negate conditional"
+        ],
+        "second": 2
+    },
+    "181": {
+        "first": [
+            "",
+            "Replace conditional expression with boolean expression"
+        ],
+        "second": 2
+    },
+    "182": {
+        "first": [
+            "",
+            "Negate conditional",
+            "Replace conditional expression with boolean expression"
+        ],
+        "second": 3
+    },
+    "183": {
+        "first": [
+            "",
+            "Replace cast with variable"
+        ],
+        "second": 2
+    },
+    "184": {
+        "first": [
+            "",
+            "Merge parallel ifs"
+        ],
+        "second": 2
+    }
+}

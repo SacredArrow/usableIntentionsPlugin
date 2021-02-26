@@ -6,14 +6,29 @@
     <!-- Product and plugin compatibility requirements -->
     <!-- https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.java</depends>
 
-    <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="org.jetbrains.plugins.template.services.MyApplicationService"/>
-        <projectService serviceImplementation="org.jetbrains.plugins.template.services.MyProjectService"/>
+    <extensionPoints>
+        <extensionPoint name="metricsExtensionPoint"
+                        interface="metrics.Metric"/>
+    </extensionPoints>
+
+    <extensions defaultExtensionNs="org.jetbrains.plugins.template">
+        <metricsExtensionPoint implementation="metrics.NumberOfParametersMetric"/>
+        <metricsExtensionPoint implementation="metrics.AverageLengthOfParameterNames"/>
+        <metricsExtensionPoint implementation="metrics.NumberOfPlusesMetric"/>
+        <metricsExtensionPoint implementation="metrics.NestingDepthMetric"/>
+        <metricsExtensionPoint implementation="metrics.NumberOfLineBreaksInsideExpression"/>
+        <metricsExtensionPoint implementation="metrics.MaxLineLengthInsideExpression"/>
+        <metricsExtensionPoint implementation="metrics.NumberOfEmptyLinesMetric"/>
+        <metricsExtensionPoint implementation="metrics.IndentationsNumber"/>
+        <metricsExtensionPoint implementation="metrics.NumberOfLines"/>
     </extensions>
 
-    <applicationListeners>
-        <listener class="org.jetbrains.plugins.template.listeners.MyProjectManagerListener"
-                  topic="com.intellij.openapi.project.ProjectManagerListener"/>
-    </applicationListeners>
+    <actions>
+        <action id="your.action.id" class="RunPluginAction"
+                text="Run AST Plugin" description="Builds AST of selected code, counts variables, accesses and exceptions" icon="AllIcons.Actions.DiagramDiff">
+            <keyboard-shortcut keymap="$default" first-keystroke="alt G"/>
+        </action>
+    </actions>
 </idea-plugin>

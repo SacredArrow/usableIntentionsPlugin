@@ -43,6 +43,8 @@ repositories {
 }
 dependencies {
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.15.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.0")
+    implementation("nz.ac.waikato.cms.weka:weka-stable:3.8.5")
 }
 
 // Configure gradle-intellij-plugin plugin.
@@ -76,6 +78,19 @@ detekt {
         txt.enabled = false
     }
 }
+
+
+
+java {
+    val kotlinSrcDir = "/home/custos/Projects/IdeaProjects/intellij-platform-plugin-template-main/src/main/"
+    val mainJavaSourceSet: SourceDirectorySet = sourceSets.getByName("main").java
+    val res = sourceSets.getByName("main").resources
+    res.srcDir("src/main/resources")
+    mainJavaSourceSet.srcDir(kotlinSrcDir)
+    println(mainJavaSourceSet.srcDirs)
+}
+
+
 
 tasks {
     // Set the compatibility versions to 1.8

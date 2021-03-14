@@ -1,9 +1,14 @@
+import com.intellij.codeInsight.intention.IntentionAction
+import com.intellij.codeInsight.intention.IntentionManager
 import com.intellij.codeInsight.intention.impl.config.IntentionManagerImpl
 import com.intellij.openapi.actionSystem.ActionGroup
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.DefaultActionGroup
+import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.extensions.ExtensionPointName
+import com.intellij.openapi.project.Project
+import com.intellij.psi.PsiFile
 import graph.Graph
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
@@ -17,8 +22,7 @@ import kotlin.test.assertTrue
 import java.util.ArrayList
 
 import weka.core.Instances
-
-
+import kotlin.system.measureTimeMillis
 
 
 class ActionGroupBuilder {
@@ -26,7 +30,10 @@ class ActionGroupBuilder {
 
         val actionGroup = DefaultActionGroup()
         val applier = SequentialApplier(handler)
-        applier.start()
+        val time = measureTimeMillis {
+            applier.start()
+        }
+        println(time)
         val codePieces = applier.getCodePieces().toList()
         if (codePieces.isEmpty()) return actionGroup
         val graph = Graph()
@@ -39,25 +46,43 @@ class ActionGroupBuilder {
             val name = path.first.drop(1).joinToString()
             val action = object : AnAction(name) {
                 override fun actionPerformed(e: AnActionEvent) {
-                    for (name in path.first.drop(1)) {
-                        applier.runWriteCommandAndCommit {
-                            IntentionManagerImpl().availableIntentions.filter { it.familyName == name }[0].invoke(
-                                handler.project,
-                                handler.editor,
-                                handler.file
-                            )
+//                    for (name in path.first.drop(1)) {
+//                        applier.runWriteCommandAndCommit {
+//                            IntentionManagerImpl().availableIntentions.filter { it.familyName == name }[0].invoke(
+//                                handler.project,
+//                                handler.editor,
+//                                handler.file
+//                            )
+//                        }
+//                    }
+                    IntentionManager.getInstance().addAction(object: IntentionAction {
+                        override fun startInWriteAction(): Boolean {
+                            return true
                         }
-                    }
-//                    val dataSet_train = getDataSet("/home/custos/Projects/Diploma/trash/train.arff")
-//                    val dataSet_test = getDataSet("/home/custos/Projects/Diploma/trash/test.arff")
-//                    val eval = Evaluation(dataSet_train)
-//                    eval.evaluateModel(rf, dataSet_test)
-//                    println("** Decision Tress Evaluation with Datasets **");
-//                    println(eval.toSummaryString());
-//                    print(" the expression for the input data as per alogorithm is ");
-//                    println(rf);
-//                    println(eval.toMatrixString());
-//                    println(eval.toClassDetailsString());
+
+                        override fun getText(): String {
+                            return name
+                        }
+
+                        override fun getFamilyName(): String {
+                            return "Some family text"
+                        }
+
+                        override fun isAvailable(project: Project, editor: Editor?, file: PsiFile?): Boolean {
+                            return true
+                        }
+
+                        override fun invoke(project: Project, editor: Editor?, file: PsiFile?) {
+                            for (name in path.first.drop(1)) {
+                                    IntentionManagerImpl().availableIntentions.filter { it.familyName == name }[0].invoke(
+                                        project,
+                                        editor,
+                                        file
+                                    )
+                            }
+                        }
+
+                    })
                 }
 
                 override fun update(e: AnActionEvent) {

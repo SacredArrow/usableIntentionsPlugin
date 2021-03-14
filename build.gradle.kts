@@ -102,6 +102,8 @@ tasks {
         kotlinOptions.jvmTarget = "1.8"
     }
 
+    runIde { maxHeapSize = "2g" }
+
     withType<Detekt> {
         jvmTarget = "1.8"
     }

@@ -13,13 +13,18 @@ import java.util.ArrayList
 import kotlin.test.assertTrue
 
 class Predictor(private val graph: Graph) {
-
-    private val epName : ExtensionPointName<Metric> = ExtensionPointName.create("org.jetbrains.plugins.template.metricsExtensionPoint")
-    val rf = SerializationHelper.read(this::class.java.classLoader.getResource("model.weka").openStream()) as RandomForest;
-    private var metricsOriginal : Map<String, Float?> = mapOf() // May be this should be written better
-    private val encoding : Map<Int, Int> = Json.decodeFromString(this::class.java.classLoader.getResource("encoding.json").readText()) // Shows place in OneHotEncoder
-    private val nFeatures = encoding.size + epName.extensionList.size * 3
-
+    companion object Factory {
+        private val epName: ExtensionPointName<Metric> =
+            ExtensionPointName.create("org.jetbrains.plugins.template.metricsExtensionPoint")
+        val rf = SerializationHelper.read(
+            this::class.java.classLoader.getResource("model.weka").openStream()
+        ) as RandomForest;
+        private var metricsOriginal: Map<String, Float?> = mapOf() // May be this should be written better
+        private val encoding: Map<Int, Int> = Json.decodeFromString(
+            this::class.java.classLoader.getResource("encoding.json").readText()
+        ) // Shows place in OneHotEncoder
+        private val nFeatures = encoding.size + epName.extensionList.size * 3
+    }
 
     private fun predictForCodePiece(codePiece: CodePiece) : Int {
         val atts = ArrayList<Attribute>(nFeatures + 1)
@@ -87,12 +92,14 @@ class Predictor(private val graph: Graph) {
 //        for (el in rf.distributionForInstance(inst)) {
 //            println(el)
 //        }
+        println(inst)
         return rf.classifyInstance(inst).toInt()
     }
     fun predictForCodePieces(codePieces: Collection<CodePiece>) : Map<CodePiece, Int> {
         metricsOriginal = MetricsCalculator().calculateForCodePiece(codePieces.first(), epName)
         val predictions = mutableMapOf<CodePiece, Int>()
         for (codePiece in codePieces) {
+            println(codePiece.offset)
 
 //             0 is false and 1 is true
             val prediction = predictForCodePiece(codePiece)

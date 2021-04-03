@@ -12,21 +12,22 @@ import java.io.File
 import java.util.ArrayList
 import kotlin.test.assertTrue
 
-class Predictor(private val graph: Graph) {
+class Predictor(private val graph: Graph, originalCodePiece: CodePiece) {
     companion object Factory {
         private val epName: ExtensionPointName<Metric> =
             ExtensionPointName.create("org.jetbrains.plugins.template.metricsExtensionPoint")
         val rf = SerializationHelper.read(
             this::class.java.classLoader.getResource("model.weka").openStream()
         ) as RandomForest;
-        private var metricsOriginal: Map<String, Float?> = mapOf() // May be this should be written better
         private val encoding: Map<Int, Int> = Json.decodeFromString(
             this::class.java.classLoader.getResource("encoding.json").readText()
         ) // Shows place in OneHotEncoder
         private val nFeatures = encoding.size + epName.extensionList.size * 3
     }
 
-    private fun predictForCodePiece(codePiece: CodePiece) : Int {
+    private var metricsOriginal: Map<String, Float?> = MetricsCalculator().calculateForCodePiece(originalCodePiece, epName) // May be this should be written better
+
+    fun predictForCodePiece(codePiece: CodePiece) : Int {
         val atts = ArrayList<Attribute>(nFeatures + 1)
         val inst = DenseInstance(nFeatures + 1)
         val metrics = MetricsCalculator().calculateForCodePiece(codePiece, epName)
@@ -96,7 +97,6 @@ class Predictor(private val graph: Graph) {
         return rf.classifyInstance(inst).toInt()
     }
     fun predictForCodePieces(codePieces: Collection<CodePiece>) : Map<CodePiece, Int> {
-        metricsOriginal = MetricsCalculator().calculateForCodePiece(codePieces.first(), epName)
         val predictions = mutableMapOf<CodePiece, Int>()
         for (codePiece in codePieces) {
             println(codePiece.offset)

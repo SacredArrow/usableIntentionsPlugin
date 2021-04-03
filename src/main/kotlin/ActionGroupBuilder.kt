@@ -22,25 +22,31 @@ import kotlin.test.assertTrue
 import java.util.ArrayList
 
 import weka.core.Instances
+import java.util.concurrent.LinkedBlockingQueue
+import java.util.concurrent.TimeUnit
+import kotlin.concurrent.thread
 import kotlin.system.measureTimeMillis
 
 
 class ActionGroupBuilder {
-    fun build(handler: CurrentPositionHandler) : ActionGroup {
-
-        val actionGroup = DefaultActionGroup()
+    fun build(handler: CurrentPositionHandler, queue: LinkedBlockingQueue<AnAction>) {
         val applier = SequentialApplier(handler)
-        val time = measureTimeMillis {
-            applier.start()
-        }
-        println(time)
-        val codePieces = applier.getCodePieces().toList()
-        if (codePieces.isEmpty()) return actionGroup
+        val eventsQueue = LinkedBlockingQueue<IntentionEvent>()
         val graph = Graph()
-        graph.build(applier.events)
-        graph.bfs(true)
-        val predictions = Predictor(graph).predictForCodePieces(codePieces).toList().sortedByDescending { it.second } // Good predictions in the beginning
-        for ((codePiece, prediction) in predictions) {
+        val job = thread {
+            applier.start(queue = eventsQueue)
+        }
+        val originalEvent = eventsQueue.take()
+        graph.addEvent(originalEvent)
+        while (job.isAlive) {println("Waiting for event")
+            val event = eventsQueue.poll(10000, TimeUnit.MILLISECONDS)
+                ?: break // The poll is used to evade deadlock (will happen rarely when thread is running, but there is no events left)
+            println("Got intention event $event")
+            graph.addEvent(event)
+            val codePiece = applier.getCodePieceFromEvent(event)!!
+            graph.bfs(true)
+            val prediction = Predictor(graph, applier.getCodePieceFromEvent(originalEvent)!!).predictForCodePiece(codePiece)
+//                .sortedByDescending { it.second } // Good predictions in the beginning
             val pathId = graph.nodes[codePiece.hash]!!.pathIndex
             val path = Graph.Mappings.indexToPathMapping[pathId]!!
             val name = path.first.drop(1).joinToString()
@@ -55,7 +61,7 @@ class ActionGroupBuilder {
 //                            )
 //                        }
 //                    }
-                    IntentionManager.getInstance().addAction(object: IntentionAction {
+                    IntentionManager.getInstance().addAction(object : IntentionAction {
                         override fun startInWriteAction(): Boolean {
                             return true
                         }
@@ -74,23 +80,25 @@ class ActionGroupBuilder {
 
                         override fun invoke(project: Project, editor: Editor?, file: PsiFile?) {
                             for (name in path.first.drop(1)) {
-                                    IntentionManagerImpl().availableIntentions.filter { it.familyName == name }[0].invoke(
-                                        project,
-                                        editor,
-                                        file
-                                    )
+                                IntentionManagerImpl().availableIntentions.filter { it.familyName == name }[0].invoke(
+                                    project,
+                                    editor,
+                                    file
+                                )
                             }
                         }
 
                     })
                 }
 
+
                 override fun update(e: AnActionEvent) {
                     e.presentation.isEnabled = prediction == 1
                 }
             }
-            actionGroup.add(action)
+            println("Action put in queue")
+            println("$name $prediction")
+            queue.put(action)
         }
-        return actionGroup
     }
 }

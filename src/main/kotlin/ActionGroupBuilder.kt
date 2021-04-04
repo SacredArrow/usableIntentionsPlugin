@@ -38,14 +38,13 @@ class ActionGroupBuilder {
         }
         val originalEvent = eventsQueue.take()
         graph.addEvent(originalEvent)
-        while (job.isAlive) {println("Waiting for event")
-            val event = eventsQueue.poll(10000, TimeUnit.MILLISECONDS)
+        while (job.isAlive) {
+            val event = eventsQueue.poll(500, TimeUnit.MILLISECONDS)
                 ?: break // The poll is used to evade deadlock (will happen rarely when thread is running, but there is no events left)
-            println("Got intention event $event")
             graph.addEvent(event)
             val codePiece = applier.getCodePieceFromEvent(event)!!
             graph.bfs(true)
-            val prediction = Predictor(graph, applier.getCodePieceFromEvent(originalEvent)!!).predictForCodePiece(codePiece)
+            val prediction = Predictor(graph, applier.getCodePieceFromEvent(originalEvent, true)!!).predictForCodePiece(codePiece)
 //                .sortedByDescending { it.second } // Good predictions in the beginning
             val pathId = graph.nodes[codePiece.hash]!!.pathIndex
             val path = Graph.Mappings.indexToPathMapping[pathId]!!
@@ -100,5 +99,6 @@ class ActionGroupBuilder {
             println("$name $prediction")
             queue.put(action)
         }
+        job.join()
     }
 }

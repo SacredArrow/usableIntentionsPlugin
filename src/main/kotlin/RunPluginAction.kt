@@ -38,19 +38,25 @@ class RunPluginAction : AnAction() {
         val project = e.getData(LangDataKeys.PROJECT)!!
         val editor = e.getData(LangDataKeys.EDITOR)!!
         println("Works")
+        var openedPopup: ListPopup? = null
 
 
         ProgressManager.getInstance().run(object : Backgroundable(project, "Title") {
             fun showPopup(group: DefaultActionGroup) {
                 ApplicationManager.getApplication().invokeAndWait {
-                    JBPopupFactory.getInstance().createActionGroupPopup(
+                    openedPopup?.cancel()
+                }
+//                Thread.sleep(300)
+                ApplicationManager.getApplication().invokeAndWait {
+                    openedPopup = JBPopupFactory.getInstance().createActionGroupPopup(
                         "Choose Intention",
                         group,
                         SimpleDataContext.getProjectContext(project),
                         true,
                         null,
                         -1
-                    ).showInBestPositionFor(editor)
+                    )
+                    openedPopup!!.showInBestPositionFor(editor)
                 }
             }
 
@@ -59,9 +65,8 @@ class RunPluginAction : AnAction() {
                 // start your process
 
                 // Set the progress bar percentage and text
-                progressIndicator.isIndeterminate = false
-                progressIndicator.fraction = 0.10
-                progressIndicator.text = "90% to finish"
+                progressIndicator.isIndeterminate = true
+                progressIndicator.text = "Prediction started"
 
 
                 // 50% done
@@ -76,21 +81,20 @@ class RunPluginAction : AnAction() {
 //                }
                 val channel = LinkedBlockingQueue<AnAction>()
                 val job = thread {  ActionGroupBuilder().build(handler, channel)  }
-                while (job.isAlive) {
-                    Thread.sleep(1000)
-                    val action = channel.poll(10000, TimeUnit.MILLISECONDS) ?: break
-                    actionGroup.addAction(action)
+                val action = channel.take() // First action takes more time to load so we wait here
+                actionGroup.addAction(action)
+                while (true) {
+                    Thread.sleep(200)
+                    if (channel.isEmpty()) break
+                    while (channel.isNotEmpty()) {
+                        val action = channel.take()
+                        actionGroup.addAction(action)
+                    }
                     showPopup(actionGroup)
-                    println("popup shown")
+                    progressIndicator.text = "${actionGroup.childrenCount} actions processed"
                 }
-
-                progressIndicator.fraction = 0.50
-                progressIndicator.text = "50% to finish"
-
-
-                // Finished
-                progressIndicator.fraction = 1.0
-                progressIndicator.text = "finished"
+                job.join()
+                showPopup(actionGroup)
             }
         })
 

@@ -30,8 +30,6 @@ class Predictor(private val graph: Graph, originalCodePiece: CodePiece) {
     fun predictForCodePiece(codePiece: CodePiece) : Int {
         val atts = ArrayList<Attribute>(nFeatures + 1)
         val inst = DenseInstance(nFeatures + 1)
-        val metrics = MetricsCalculator().calculateForCodePiece(codePiece, epName)
-        println(metrics)
         val pathId = graph.nodes[codePiece.hash]!!.pathIndex
         assertTrue { pathId != -1 } // Trying to find a bug
         println(Graph.Mappings.indexToPathMapping[pathId])

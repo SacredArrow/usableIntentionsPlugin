@@ -1,34 +1,30 @@
-import com.intellij.codeInsight.completion.PrefixMatcher
+import com.intellij.codeInsight.CodeInsightBundle
+import com.intellij.codeInsight.intention.IntentionAction
+import com.intellij.codeInsight.intention.IntentionManager
+import com.intellij.codeInsight.intention.impl.IntentionActionWithTextCaching
 import com.intellij.codeInsight.intention.impl.preview.IntentionPreviewPopupUpdateProcessor
+import com.intellij.codeInsight.intention.impl.preview.IntentionPreviewPopupUpdateProcessor.Companion.getShortcutText
 import com.intellij.codeInsight.lookup.*
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
-
-import com.intellij.codeInsight.lookup.LookupArranger.DefaultArranger
-
-import com.intellij.codeInsight.lookup.impl.LookupImpl
-import com.intellij.openapi.actionSystem.LangDataKeys
-import com.intellij.openapi.ui.popup.JBPopupFactory
-import org.jetbrains.annotations.NotNull
 import com.intellij.openapi.actionSystem.DefaultActionGroup
+import com.intellij.openapi.actionSystem.LangDataKeys
 import com.intellij.openapi.actionSystem.impl.SimpleDataContext
 import com.intellij.openapi.application.ApplicationManager
-import com.intellij.openapi.application.ReadAction
-import com.intellij.openapi.progress.ProgressManager
-import com.intellij.openapi.progress.Task
-import com.intellij.openapi.progress.impl.ProgressManagerImpl
+import com.intellij.openapi.keymap.KeymapUtil
 import com.intellij.openapi.progress.ProgressIndicator
+import com.intellij.openapi.progress.ProgressManager
 import com.intellij.openapi.progress.Task.Backgroundable
-import com.intellij.openapi.progress.util.ProgressWindow
-import com.intellij.openapi.progress.util.ReadTask
+import com.intellij.openapi.ui.popup.JBPopupFactory
 import com.intellij.openapi.ui.popup.ListPopup
-import com.intellij.util.concurrency.NonUrgentExecutor
+import com.intellij.ui.popup.PopupFactoryImpl
+import com.intellij.ui.popup.WizardPopup
+import com.intellij.ui.popup.list.ListPopupImpl
 import kotlinx.coroutines.*
-import kotlinx.coroutines.channels.Channel
-import java.util.concurrent.BlockingQueue
-import java.util.concurrent.LinkedBlockingDeque
+import java.awt.event.ActionEvent
 import java.util.concurrent.LinkedBlockingQueue
-import java.util.concurrent.TimeUnit
+import javax.swing.AbstractAction
+import javax.swing.SwingConstants
 import kotlin.concurrent.thread
 
 
@@ -39,9 +35,15 @@ class RunPluginAction : AnAction() {
         val editor = e.getData(LangDataKeys.EDITOR)!!
         println("Works")
         var openedPopup: ListPopup? = null
+        lateinit var myPreviewPopupUpdateProcessor : IntentionPreviewPopupUpdateProcessor
+
 
 
         ProgressManager.getInstance().run(object : Backgroundable(project, "Title") {
+            val actionGroup = DefaultActionGroup()
+            val channel = LinkedBlockingQueue<AnAction>()
+            lateinit var indicator: ProgressIndicator
+
             fun showPopup(group: DefaultActionGroup) {
                 ApplicationManager.getApplication().invokeAndWait {
                     openedPopup?.cancel()
@@ -61,40 +63,95 @@ class RunPluginAction : AnAction() {
             }
 
             override fun run(progressIndicator: ProgressIndicator) {
-
+                indicator = progressIndicator
                 // start your process
 
                 // Set the progress bar percentage and text
-                progressIndicator.isIndeterminate = true
-                progressIndicator.text = "Prediction started"
+                indicator.isIndeterminate = true
+                indicator.text = "Prediction started"
 
 
                 // 50% done
                 val handler = CurrentPositionHandler(e)
-                val actionGroup = DefaultActionGroup()
-//                val job = GlobalScope.launch {
-////                    ActionGroupBuilder().build(handler, actionGroup)
-//                    repeat(1000) {
-//                        val a = 5 + 5
-//                    }
-//                    println("stop")
-//                }
-                val channel = LinkedBlockingQueue<AnAction>()
                 val job = thread {  ActionGroupBuilder().build(handler, channel)  }
+                println("After job creation") // For some strange reason this print fixes "first-run-bug"
                 val action = channel.take() // First action takes more time to load so we wait here
                 actionGroup.addAction(action)
+//                greedyGrab(200)
+                steadyGrab(400)
+                job.join()
+                showPopup(actionGroup)
+                myPreviewPopupUpdateProcessor = IntentionPreviewPopupUpdateProcessor(project, handler.file, handler.editor)
+                addPreview()
+            }
+
+            fun addPreview() {
+                val action: AbstractAction = object : AbstractAction() {
+                    override fun actionPerformed(e: ActionEvent) {
+                        myPreviewPopupUpdateProcessor.toggleShow()
+                        if (openedPopup is ListPopupImpl) {
+                            val list = (openedPopup as ListPopupImpl).list
+                            val selectedIndex = list.selectedIndex
+                            val selectedValue = list.selectedValue
+                            if (selectedValue is PopupFactoryImpl.ActionItem) {
+                                if (selectedValue.action is ActionWithIntention) {
+                                    val intention = (selectedValue.action as ActionWithIntention).intention
+                                    IntentionManager.getInstance().addAction(intention)
+                                    updatePreviewPopup(
+                                        intention,
+                                        selectedIndex
+                                    )
+                                    Thread.sleep(200) // Without this sleep, it unregisters before popup is shown
+                                    IntentionManager.getInstance().unregisterIntention(intention)
+
+                                }
+                            }
+                        }
+                    }
+                }
+                (openedPopup as WizardPopup).registerAction(
+                    "showIntentionPreview",
+                    KeymapUtil.getKeyStroke(IntentionPreviewPopupUpdateProcessor.getShortcutSet()), action
+                )
+                openedPopup!!.setAdText(CodeInsightBundle.message(
+                        "intention.preview.adv.show.text",
+                        getShortcutText()
+                    ), SwingConstants.LEFT
+                )
+            }
+
+            private fun updatePreviewPopup(action: IntentionAction, index: Int) {
+                ApplicationManager.getApplication().assertIsDispatchThread()
+                myPreviewPopupUpdateProcessor.setup({ text: String? ->
+                    ApplicationManager.getApplication().assertIsDispatchThread()
+                    openedPopup!!.setAdText(text, SwingConstants.LEFT)
+                    Unit
+                }, index)
+                myPreviewPopupUpdateProcessor.updatePopup(action)
+            }
+
+            fun greedyGrab(interval: Long) { // Takes all every interval
                 while (true) {
-                    Thread.sleep(200)
+                    Thread.sleep(interval)
                     if (channel.isEmpty()) break
                     while (channel.isNotEmpty()) {
                         val action = channel.take()
                         actionGroup.addAction(action)
                     }
                     showPopup(actionGroup)
-                    progressIndicator.text = "${actionGroup.childrenCount} actions processed"
+                    indicator.text = "${actionGroup.childrenCount} actions processed"
                 }
-                job.join()
-                showPopup(actionGroup)
+            }
+
+            fun steadyGrab(interval: Long) { // Takes one every interval
+                while (true) {
+                    Thread.sleep(interval)
+                    if (channel.isEmpty()) break
+                    val action = channel.take()
+                    actionGroup.addAction(action)
+                    showPopup(actionGroup)
+                    indicator.text = "${actionGroup.childrenCount} actions processed"
+                }
             }
         })
 

@@ -49,18 +49,24 @@ class ActionGroupBuilder {
             val pathId = graph.nodes[codePiece.hash]!!.pathIndex
             val path = Graph.Mappings.indexToPathMapping[pathId]!!
             val name = path.first.drop(1).joinToString()
-            val action = object : AnAction(name) {
+            val action = object : ActionWithIntention(name) {
                 override fun actionPerformed(e: AnActionEvent) {
-//                    for (name in path.first.drop(1)) {
-//                        applier.runWriteCommandAndCommit {
-//                            IntentionManagerImpl().availableIntentions.filter { it.familyName == name }[0].invoke(
-//                                handler.project,
-//                                handler.editor,
-//                                handler.file
-//                            )
-//                        }
-//                    }
-                    IntentionManager.getInstance().addAction(object : IntentionAction {
+                    for (name in path.first.drop(1)) {
+                        applier.runWriteCommandAndCommit {
+                            IntentionManagerImpl().availableIntentions.filter { it.familyName == name }[0].invoke(
+                                handler.project,
+                                handler.editor,
+                                handler.file
+                            )
+                        }
+                    }
+                }
+
+                override fun update(e: AnActionEvent) {
+                    e.presentation.isEnabled = prediction == 1
+                }
+
+                override val intention = object : IntentionAction {
                         override fun startInWriteAction(): Boolean {
                             return true
                         }
@@ -87,14 +93,9 @@ class ActionGroupBuilder {
                             }
                         }
 
-                    })
-                }
-
-
-                override fun update(e: AnActionEvent) {
-                    e.presentation.isEnabled = prediction == 1
-                }
+                    }
             }
+
             println("Action put in queue")
             println("$name $prediction")
             queue.put(action)

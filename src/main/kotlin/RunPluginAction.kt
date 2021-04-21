@@ -23,12 +23,16 @@ import com.intellij.ui.popup.list.ListPopupImpl
 import kotlinx.coroutines.*
 import java.awt.event.ActionEvent
 import java.util.concurrent.LinkedBlockingQueue
+import java.util.concurrent.TimeUnit
 import javax.swing.AbstractAction
 import javax.swing.SwingConstants
 import kotlin.concurrent.thread
 
 
 class RunPluginAction : AnAction() {
+    companion object {
+        var n_runs = 0
+    }
     override fun actionPerformed(e: AnActionEvent) {
         GlobalStorage.out_path = System.getenv()["OUT_PATH"]
         val project = e.getData(LangDataKeys.PROJECT)!!
@@ -70,19 +74,26 @@ class RunPluginAction : AnAction() {
                 indicator.isIndeterminate = true
                 indicator.text = "Prediction started"
 
-
+                n_runs++
                 // 50% done
                 val handler = CurrentPositionHandler(e)
                 val job = thread {  ActionGroupBuilder().build(handler, channel)  }
                 println("After job creation") // For some strange reason this print fixes "first-run-bug"
-                val action = channel.take() // First action takes more time to load so we wait here
-                actionGroup.addAction(action)
+                val timeout = if (n_runs == 1) 5000L else 1500L
+                val action = channel.poll(timeout, TimeUnit.MILLISECONDS) // First action takes more time to load so we wait here
+                if (action != null) {
+                    actionGroup.addAction(action)
 //                greedyGrab(200)
-                steadyGrab(400)
-                job.join()
-                showPopup(actionGroup)
-                myPreviewPopupUpdateProcessor = IntentionPreviewPopupUpdateProcessor(project, handler.file, handler.editor)
-                addPreview()
+                    steadyGrab(400)
+                    job.join()
+                    showPopup(actionGroup)
+                    myPreviewPopupUpdateProcessor =
+                        IntentionPreviewPopupUpdateProcessor(project, handler.file, handler.editor)
+                    addPreview()
+                } else {
+                    indicator.text = "Sorry, no variants found"
+                    Thread.sleep(1000)
+                }
             }
 
             fun addPreview() {

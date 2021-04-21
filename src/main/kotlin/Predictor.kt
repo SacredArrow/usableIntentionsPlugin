@@ -14,6 +14,7 @@ import kotlin.test.assertTrue
 
 class Predictor(private val graph: Graph, originalCodePiece: CodePiece) {
     companion object Factory {
+        private val withPaths = false
         private val epName: ExtensionPointName<Metric> =
             ExtensionPointName.create("org.jetbrains.plugins.template.metricsExtensionPoint")
         val rf = SerializationHelper.read(
@@ -22,7 +23,12 @@ class Predictor(private val graph: Graph, originalCodePiece: CodePiece) {
         private val encoding: Map<Int, Int> = Json.decodeFromString(
             this::class.java.classLoader.getResource("encoding.json").readText()
         ) // Shows place in OneHotEncoder
-        private val nFeatures = encoding.size + epName.extensionList.size * 3
+        private var nFeatures = epName.extensionList.size * 3
+        init {
+            if (withPaths) {
+                nFeatures += encoding.size
+            }
+        }
     }
 
     private var metricsOriginal: Map<String, Float?> = MetricsCalculator().calculateForCodePiece(originalCodePiece, epName) // May be this should be written better
@@ -30,20 +36,23 @@ class Predictor(private val graph: Graph, originalCodePiece: CodePiece) {
     fun predictForCodePiece(codePiece: CodePiece) : Int {
         val atts = ArrayList<Attribute>(nFeatures + 1)
         val inst = DenseInstance(nFeatures + 1)
-        val pathId = graph.nodes[codePiece.hash]!!.pathIndex
-        assertTrue { pathId != -1 } // Trying to find a bug
-        println(Graph.Mappings.indexToPathMapping[pathId])
-        if (pathId == 1) return -1
-        @Suppress("ReplaceManualRangeWithIndicesCalls")
-        for (i in 0 until encoding.size) {
-            atts.add(Attribute(i.toString()))
-            if (i == encoding[pathId]) {
-                inst.setValue(i, 1.0)
-            } else {
-                inst.setValue(i, 0.0)
+        var ix = 0
+        if (withPaths) {
+            val pathId = graph.nodes[codePiece.hash]!!.pathIndex
+            assertTrue { pathId != -1 } // Trying to find a bug
+            println(Graph.Mappings.indexToPathMapping[pathId])
+            if (pathId == 1) return -1
+            @Suppress("ReplaceManualRangeWithIndicesCalls")
+            for (i in 0 until encoding.size) {
+                atts.add(Attribute(i.toString()))
+                if (i == encoding[pathId]) {
+                    inst.setValue(i, 1.0)
+                } else {
+                    inst.setValue(i, 0.0)
+                }
             }
+            ix = encoding.size
         }
-        var ix = encoding.size
         val metricsChanged = MetricsCalculator().calculateForCodePiece(codePiece, epName)
         for ((key, value) in metricsOriginal) {
             atts.add(Attribute(key + "_x"))
@@ -80,6 +89,7 @@ class Predictor(private val graph: Graph, originalCodePiece: CodePiece) {
             ix++
         }
         val fvClassVal = ArrayList<String>(2)
+        // This order should be consistent with order in model!
         fvClassVal.add("False")
         fvClassVal.add("True")
         val myClass = Attribute("ScheduledFirst", fvClassVal)
